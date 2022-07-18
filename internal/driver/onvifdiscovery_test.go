@@ -289,160 +289,61 @@ func TestOnvifDiscovery_discoveryFilter(t *testing.T) {
 	}
 }
 
-func TestOnvifDiscovery_discoverFilter_mixedNewAndOldDevices(t *testing.T) {
-	mockService, driver := createDriverWithMockService()
-	mockService.On("Devices").
-		Return(createTestDeviceList()).Once()
-	mockService.On("Name").
-		Return("device-onvif-camera").Times(4)
-	actual := driver.discoverFilter(
-		[]sdkModel.DiscoveredDevice{
-			{
-				Name: "testDevice1", Protocols: map[string]models.ProtocolProperties{
-					OnvifProtocol: map[string]string{
-						EndpointRefAddress: "123",
-					},
-				},
-			},
-			{
-				Name: "testDevice2", Protocols: map[string]models.ProtocolProperties{
-					OnvifProtocol: map[string]string{
-						EndpointRefAddress: "456",
-					},
-				},
-			},
-			{
-				Name: "testDevice3", Protocols: map[string]models.ProtocolProperties{
-					OnvifProtocol: map[string]string{
-						EndpointRefAddress: "789",
-					},
-				},
-			},
-			{
-				Name: "testDevice4", Protocols: map[string]models.ProtocolProperties{
-					OnvifProtocol: map[string]string{
-						EndpointRefAddress: "xyz",
-					},
-				},
-			},
-			{
-				Name: "testDevice5", Protocols: map[string]models.ProtocolProperties{
-					OnvifProtocol: map[string]string{
-						EndpointRefAddress: "def",
-					},
-				},
-			},
-		},
-	)
-	mockService.AssertExpectations(t)
+// func createParams() (params onvif.DeviceParams) {
+// 	return onvif.DeviceParams{
+// 		Xaddr:              "1.1.1.1:1",
+// 		EndpointRefAddress: "1234",
+// 		Username:           "hello",
+// 		Password:           "world",
+// 	}
+// }
 
-	assert.Equal(t, actual, []sdkModel.DiscoveredDevice{
-		{
-			Name: "testDevice4", Protocols: map[string]models.ProtocolProperties{
-				OnvifProtocol: map[string]string{
-					EndpointRefAddress: "xyz",
-				},
-			},
-		},
-		{
-			Name: "testDevice5", Protocols: map[string]models.ProtocolProperties{
-				OnvifProtocol: map[string]string{
-					EndpointRefAddress: "def",
-				},
-			},
-		},
-	})
-}
-
-// func TestOnvifDiscovery_updateExistingDevice(t *testing.T) {
-// 	mockService, driver := createDriverWithMockService()
-// 	mockService.On("UpdateDevice", models.Device{
-// 		Protocols: map[string]contract.ProtocolProperties{
-// 			OnvifProtocol: map[string]string{
-// 				"Address":  "5.6.7.8",
-// 				"Port":     "2",
-// 				"LastSeen": time.Now().Format(time.UnixDate),
-// 			},
-// 		},
-// 	}).Return(nil).Once()
-// 	err := driver.updateExistingDevice(
-// 		contract.Device{
-// 			Protocols: map[string]contract.ProtocolProperties{
-// 				OnvifProtocol: map[string]string{
-// 					"Address": "1.2.3.4",
-// 					"Port":    "1",
-// 				},
-// 			},
-// 		}, sdkModel.DiscoveredDevice{
-// 			Protocols: map[string]contract.ProtocolProperties{
-// 				OnvifProtocol: map[string]string{
-// 					"Address": "5.6.7.8",
-// 					"Port":    "2",
-// 				},
-// 			},
-// 		})
-// 	driver.lc.Info("Helo")
-// 	mockService.AssertExpectations(t)
-// 	require.NoError(t, err)
+// func createDevice() onvif.Device {
+// 	device, _ := onvif.NewDevice(createParams())
+// 	return *device
 // }
 
 // func TestDriver_createDiscoveredDevice(t *testing.T) {
-// 	type fields struct {
-// 		lc               logger.LoggingClient
-// 		asynchCh         chan<- *sdkModel.AsyncValues
-// 		deviceCh         chan<- []sdkModel.DiscoveredDevice
-// 		sdkService       SDKService
-// 		onvifClients     map[string]*OnvifClient
-// 		clientsMu        *sync.RWMutex
-// 		config           *ServiceConfig
-// 		configMu         *sync.RWMutex
-// 		addedWatchers    bool
-// 		watchersMu       sync.Mutex
-// 		macAddressMapper *MACAddressMapper
-// 		debounceTimer    *time.Timer
-// 		debounceMu       sync.Mutex
-// 		taskCh           chan struct{}
-// 		wg               sync.WaitGroup
-// 	}
-// 	type args struct {
-// 		onvifDevice onvif.Device
-// 	}
 // 	tests := []struct {
-// 		name    string
-// 		fields  fields
-// 		args    args
-// 		want    sdkModel.DiscoveredDevice
-// 		wantErr bool
+// 		name             string
+// 		device           onvif.Device
+// 		discoveredDevice sdkModel.DiscoveredDevice
+// 		errorExpected    bool
 // 	}{
-// 		// TODO: Add test cases.
+// 		{
+// 			name:   "happy path",
+// 			device: createDevice(),
+// 			discoveredDevice: sdkModel.DiscoveredDevice{
+// 				Name: "1.1.1.1:1",
+// 				Protocols: map[string]contract.ProtocolProperties{
+// 					OnvifProtocol: {
+// 						Address:            "1.1.1.1",
+// 						Port:               "1",
+// 						SecretPath:         "credentials001",
+// 						EndpointRefAddress: "1234",
+// 						DeviceStatus:       "Reachable",
+// 						LastSeen:           time.Now().Format(time.UnixDate),
+// 					},
+// 					CustomMetadata: {},
+// 				},
+// 			},
+// 		},
 // 	}
-// 	for _, tt := range tests {
-// 		t.Run(tt.name, func(t *testing.T) {
-// 			d := &Driver{
-// 				lc:               tt.fields.lc,
-// 				asynchCh:         tt.fields.asynchCh,
-// 				deviceCh:         tt.fields.deviceCh,
-// 				sdkService:       tt.fields.sdkService,
-// 				onvifClients:     tt.fields.onvifClients,
-// 				clientsMu:        tt.fields.clientsMu,
-// 				config:           tt.fields.config,
-// 				configMu:         tt.fields.configMu,
-// 				addedWatchers:    tt.fields.addedWatchers,
-// 				watchersMu:       tt.fields.watchersMu,
-// 				macAddressMapper: tt.fields.macAddressMapper,
-// 				debounceTimer:    tt.fields.debounceTimer,
-// 				debounceMu:       tt.fields.debounceMu,
-// 				taskCh:           tt.fields.taskCh,
-// 				wg:               tt.fields.wg,
+// 	for _, test := range tests {
+// 		test := test
+// 		t.Run(test.name, func(t *testing.T) {
+// 			driver := Driver{
+// 				lc:       logger.NewMockClient(),
+// 				configMu: &sync.RWMutex{},
 // 			}
-// 			got, err := d.createDiscoveredDevice(tt.args.onvifDevice)
-// 			if (err != nil) != tt.wantErr {
-// 				t.Errorf("Driver.createDiscoveredDevice() error = %v, wantErr %v", err, tt.wantErr)
+// 			actualDevice, err := driver.createDiscoveredDevice(test.device)
+// 			if test.errorExpected {
+// 				assert.Error(t, err)
 // 				return
 // 			}
-// 			if !reflect.DeepEqual(got, tt.want) {
-// 				t.Errorf("Driver.createDiscoveredDevice() = %v, want %v", got, tt.want)
-// 			}
+// 			require.NoError(t, err)
+
+// 			assert.Equal(t, test.discoveredDevice, actualDevice)
 // 		})
 // 	}
 // }
