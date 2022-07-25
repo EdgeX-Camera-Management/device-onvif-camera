@@ -476,13 +476,21 @@ func (d *Driver) publishControlPlaneEvent(deviceName, eventType string) {
 // when a new Device associated with this Device Service is added
 func (d *Driver) AddDevice(deviceName string, protocols map[string]models.ProtocolProperties, adminState models.AdminState) error {
 	// only execute if this was not called for the control-plane device
-	if deviceName != d.sdkService.Name() {
-		d.publishControlPlaneEvent(deviceName, cameraAdded)
-		err := d.createOnvifClient(deviceName)
-		if err != nil {
-			return errors.NewCommonEdgeXWrapper(err)
-		}
+	if deviceName == d.sdkService.Name() {
+		return nil
 	}
+
+	d.publishControlPlaneEvent(deviceName, cameraAdded)
+	err := d.createOnvifClient(deviceName)
+	if err != nil {
+		return errors.NewCommonEdgeXWrapper(err)
+	}
+
+	device, err := d.sdkService.GetDeviceByName(deviceName)
+	if err != nil {
+		return errors.NewCommonEdgeXWrapper(err)
+	}
+	d.checkStatusOfDevice(device) // check the status of the newly added device
 	return nil
 }
 
