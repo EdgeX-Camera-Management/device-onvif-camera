@@ -9,6 +9,7 @@ package driver
 import (
 	stdErrors "errors"
 	"fmt"
+	onvifdevice "github.com/IOTechSystems/onvif/device"
 	"net"
 	"os"
 	"strings"
@@ -111,7 +112,11 @@ func (d *Driver) createDiscoveredDevice(onvifDevice onvif.Device) (sdkModel.Disc
 		d.lc.Debugf("No MAC Address match was found for EndpointRefAddress %s", endpointRefAddr)
 	}
 
-	devInfo, edgexErr := d.getDeviceInformation(device)
+	var devInfo *onvifdevice.GetDeviceInformationResponse
+	devClient, edgexErr := d.newTemporaryOnvifClient(device)
+	if edgexErr == nil {
+		devInfo, edgexErr = devClient.getDeviceInformation()
+	}
 
 	var discovered sdkModel.DiscoveredDevice
 	if edgexErr != nil {
@@ -140,7 +145,7 @@ func (d *Driver) createDiscoveredDevice(onvifDevice onvif.Device) (sdkModel.Disc
 			strings.ReplaceAll(devInfo.Model, " ", "-"),
 			endpointRefAddr)
 
-		netInfo, err := d.getNetworkInterfaces(device)
+		netInfo, err := devClient.getNetworkInterfaces()
 		if err != nil {
 			d.lc.Warnf("failed to get the network information for device %s, %v", deviceName, edgexErr)
 		} else {

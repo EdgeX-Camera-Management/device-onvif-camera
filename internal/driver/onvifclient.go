@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"reflect"
 	"strings"
 	"time"
 
@@ -373,6 +374,25 @@ func snapshotUriRequestData(profileToken xsdOnvif.ReferenceToken) ([]byte, error
 	return data, nil
 }
 
+// callOnvifFunctionForResponse calls the specified onvif function, accepting the response object as a parameter. Will convert
+// the response into the type of the input responseObj, or return an error.
+func (onvifClient *OnvifClient) callOnvifFunctionForResponse(serviceName, functionName string, data []byte, responseObj interface{}) errors.EdgeX {
+	resp, err := onvifClient.callOnvifFunction(serviceName, functionName, data)
+	if err != nil {
+		return err
+	}
+	outVal := reflect.ValueOf(responseObj)
+	if !outVal.Elem().CanSet() {
+		return errors.NewCommonEdgeX(errors.KindServerError, fmt.Sprintf("cannot set response value on object of type %T: IsZero: %v", responseObj, outVal.IsZero()), nil)
+	}
+	respVal := reflect.ValueOf(resp)
+	if !respVal.CanConvert(outVal.Type()) {
+		return errors.NewCommonEdgeX(errors.KindServerError, fmt.Sprintf("cannot convert %v to %v", respVal.Type(), outVal.Type()), nil)
+	}
+	outVal.Elem().Set(respVal.Elem())
+	return nil
+}
+
 func (onvifClient *OnvifClient) callOnvifFunction(serviceName, functionName string, data []byte) (interface{}, errors.EdgeX) {
 	function, edgexErr := onvif.FunctionByServiceAndFunctionName(serviceName, functionName)
 	if edgexErr != nil {
@@ -456,4 +476,22 @@ func (onvifClient *OnvifClient) checkRebootNeeded(responseContent interface{}) {
 		onvifClient.RebootNeeded = bool(setNetworkInterfacesResponse.RebootNeeded)
 		return
 	}
+}
+
+func (onvifClient *OnvifClient) getNetworkInterfaces() (*onvifdevice.GetNetworkInterfacesResponse, errors.EdgeX) {
+	netInfo := new(onvifdevice.GetNetworkInterfacesResponse)
+	edgexErr := onvifClient.callOnvifFunctionForResponse(onvif.DeviceWebService, onvif.GetNetworkInterfaces, []byte{}, netInfo)
+	return netInfo, edgexErr
+}
+
+func (onvifClient *OnvifClient) getDeviceInformation() (*onvifdevice.GetDeviceInformationResponse, errors.EdgeX) {
+	devInfo := new(onvifdevice.GetDeviceInformationResponse)
+	edgexErr := onvifClient.callOnvifFunctionForResponse(onvif.DeviceWebService, onvif.GetDeviceInformation, []byte{}, devInfo)
+	return devInfo, edgexErr
+}
+
+func (onvifClient *OnvifClient) getEndpointReference() (*onvifdevice.GetEndpointReferenceResponse, errors.EdgeX) {
+	endpointRef := new(onvifdevice.GetEndpointReferenceResponse)
+	edgexErr := onvifClient.callOnvifFunctionForResponse(onvif.DeviceWebService, onvif.GetEndpointReference, []byte{}, endpointRef)
+	return endpointRef, edgexErr
 }

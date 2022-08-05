@@ -31,7 +31,6 @@ import (
 	"github.com/edgexfoundry/go-mod-core-contracts/v2/models"
 
 	"github.com/IOTechSystems/onvif"
-	onvifdevice "github.com/IOTechSystems/onvif/device"
 	wsdiscovery "github.com/IOTechSystems/onvif/ws-discovery"
 )
 
@@ -179,6 +178,11 @@ func (d *Driver) Initialize(lc logger.LoggingClient, asyncCh chan<- *sdkModel.As
 		}()
 	}
 
+	// Check the status of every device on startup. Since the service may have been offline for a long time,
+	// the state of all the devices are unknown. Do this whether the user has enabled the recurring status
+	// check loop or not, to at least get a baseline.
+	go d.checkStatuses()
+
 	d.lc.Info("Driver initialized.")
 	return nil
 }
@@ -247,7 +251,6 @@ func (d *Driver) debouncedDiscover() {
 
 // todo: remove this method once the Device SDK has been updated as per https://github.com/edgexfoundry/device-sdk-go/issues/1100
 func (d *Driver) addProvisionWatchers() error {
-
 	// this setting is a workaround for the fact that there is no standard way to define this directory using the SDK
 	// the snap needs to be able to change the location of the provision watchers
 	d.configMu.RLock()
@@ -483,6 +486,21 @@ func (d *Driver) AddDevice(deviceName string, protocols map[string]models.Protoc
 			return errors.NewCommonEdgeXWrapper(err)
 		}
 	}
+<<<<<<< Updated upstream
+=======
+
+	d.publishControlPlaneEvent(deviceName, cameraAdded)
+	err := d.createOnvifClient(deviceName)
+	if err != nil {
+		return errors.NewCommonEdgeXWrapper(err)
+	}
+
+	device, err := d.sdkService.GetDeviceByName(deviceName)
+	if err != nil {
+		return errors.NewCommonEdgeXWrapper(err)
+	}
+	go d.checkStatusOfDevice(device) // check the status of the newly added device (in the background)
+>>>>>>> Stashed changes
 	return nil
 }
 
@@ -645,55 +663,6 @@ func addressAndPort(xaddr string) (string, string) {
 	}
 }
 
-// todo: this should be integrated better with getDeviceInformation to avoid creating another temporary client
-func (d *Driver) getNetworkInterfaces(device models.Device) (netInfo *onvifdevice.GetNetworkInterfacesResponse, edgexErr errors.EdgeX) {
-	devClient, edgexErr := d.newTemporaryOnvifClient(device)
-	if edgexErr != nil {
-		return nil, errors.NewCommonEdgeXWrapper(edgexErr)
-	}
-	devInfoResponse, edgexErr := devClient.callOnvifFunction(onvif.DeviceWebService, onvif.GetNetworkInterfaces, []byte{})
-	if edgexErr != nil {
-		return nil, errors.NewCommonEdgeXWrapper(edgexErr)
-	}
-	devInfo, ok := devInfoResponse.(*onvifdevice.GetNetworkInterfacesResponse)
-	if !ok {
-		return nil, errors.NewCommonEdgeX(errors.KindServerError, fmt.Sprintf("invalid GetNetworkInterfacesResponse for the camera %s", device.Name), nil)
-	}
-	return devInfo, nil
-}
-
-func (d *Driver) getDeviceInformation(device models.Device) (devInfo *onvifdevice.GetDeviceInformationResponse, edgexErr errors.EdgeX) {
-	devClient, edgexErr := d.newTemporaryOnvifClient(device)
-	if edgexErr != nil {
-		return nil, errors.NewCommonEdgeXWrapper(edgexErr)
-	}
-	devInfoResponse, edgexErr := devClient.callOnvifFunction(onvif.DeviceWebService, onvif.GetDeviceInformation, []byte{})
-	if edgexErr != nil {
-		return nil, errors.NewCommonEdgeXWrapper(edgexErr)
-	}
-	devInfo, ok := devInfoResponse.(*onvifdevice.GetDeviceInformationResponse)
-	if !ok {
-		return nil, errors.NewCommonEdgeX(errors.KindServerError, fmt.Sprintf("invalid GetDeviceInformationResponse for the camera %s", device.Name), nil)
-	}
-	return devInfo, nil
-}
-
-func (d *Driver) getEndpointReference(device models.Device) (devInfo *onvifdevice.GetEndpointReferenceResponse, edgexErr errors.EdgeX) {
-	devClient, edgexErr := d.newTemporaryOnvifClient(device)
-	if edgexErr != nil {
-		return nil, errors.NewCommonEdgeXWrapper(edgexErr)
-	}
-	endpointRefResponse, edgexErr := devClient.callOnvifFunction(onvif.DeviceWebService, onvif.GetEndpointReference, []byte{})
-	if edgexErr != nil {
-		return nil, errors.NewCommonEdgeXWrapper(edgexErr)
-	}
-	devEndpointRef, ok := endpointRefResponse.(*onvifdevice.GetEndpointReferenceResponse)
-	if !ok {
-		return nil, errors.NewCommonEdgeX(errors.KindServerError, fmt.Sprintf("invalid GetEndpointReferenceResponse for the camera %s", device.Name), nil)
-	}
-	return devEndpointRef, nil
-}
-
 // newOnvifClient creates a temporary client for auto-discovery
 func (d *Driver) newTemporaryOnvifClient(device models.Device) (*OnvifClient, errors.EdgeX) {
 	xAddr, edgexErr := GetCameraXAddr(device.Protocols)
@@ -741,19 +710,24 @@ func (d *Driver) refreshDevice(device models.Device) error {
 	// save the MAC Address in case it was changed by the calling code
 	hwAddress := device.Protocols[OnvifProtocol][MACAddress]
 
-	devInfo, err := d.getDeviceInformation(device)
+	devClient, edgexErr := d.newTemporaryOnvifClient(device)
+	if edgexErr != nil {
+		return edgexErr
+	}
+
+	devInfo, err := devClient.getDeviceInformation()
 	if err != nil {
 		return err
 	}
 
-	netInfo, netErr := d.getNetworkInterfaces(device)
+	netInfo, netErr := devClient.getNetworkInterfaces()
 	if netErr != nil {
 		d.lc.Warnf("Error trying to get network interfaces for device %s: %s", device.Name, netErr.Error())
 	}
 
-	endpointRef, endpointErr := d.getEndpointReference(device)
+	endpointRef, endpointErr := devClient.getEndpointReference()
 	if endpointErr != nil {
-		d.lc.Warnf("Error trying to get get endpoint reference for device %s: %s", device.Name, endpointErr.Error())
+		d.lc.Warnf("Unable to get endpoint reference for device %s (command may not be supported): %s", device.Name, endpointErr.Error())
 	}
 
 	// update device to latest version in cache to prevent race conditions
@@ -767,15 +741,18 @@ func (d *Driver) refreshDevice(device models.Device) error {
 	if netErr == nil { // only update if there was no error querying the net info
 		hwAddress = string(netInfo.NetworkInterfaces.Info.HwAddress)
 	}
-	if hwAddress != device.Protocols[OnvifProtocol][MACAddress] {
+	if hwAddress != device.Protocols[OnvifProtocol][MACAddress] && hwAddress != "" {
 		device.Protocols[OnvifProtocol][MACAddress] = hwAddress
 		isChanged = true
 	}
 
 	if endpointErr == nil { // only update if there was no error querying the endpoint ref address
 		uuidElements := strings.Split(endpointRef.GUID, ":")
-		device.Protocols[OnvifProtocol][EndpointRefAddress] = uuidElements[len(uuidElements)-1]
-		isChanged = true
+		endpointRefStr := uuidElements[len(uuidElements)-1]
+		if endpointRefStr != "" {
+			device.Protocols[OnvifProtocol][EndpointRefAddress] = endpointRefStr
+			isChanged = true
+		}
 	}
 
 	if devInfo.Manufacturer != device.Protocols[OnvifProtocol][Manufacturer] ||
@@ -797,26 +774,38 @@ func (d *Driver) refreshDevice(device models.Device) error {
 	}
 
 	if isChanged {
+		// if the device was previously unknown, update the device name
 		if strings.HasPrefix(device.Name, UnknownDevicePrefix) {
-			d.lc.Infof("Removing device '%s' to update device with the updated name", device.Name)
-			err := d.sdkService.RemoveDeviceByName(device.Name)
-			if err != nil {
-				d.lc.Warnf("An error occurred while removing the device %s: %s",
-					device.Name, err)
-			}
-
-			device.Id = ""
-			// Spaces are not allowed in the device name
-			device.Name = fmt.Sprintf("%s-%s-%s",
-				strings.ReplaceAll(devInfo.Manufacturer, " ", "-"),
-				strings.ReplaceAll(devInfo.Model, " ", "-"),
-				device.Protocols[OnvifProtocol][EndpointRefAddress])
-			d.lc.Infof("Adding device back with the updated name '%s'", device.Name)
-			_, err = d.sdkService.AddDevice(device)
-			return err
+			return d.updateDeviceName(device)
 		}
 
 		return d.sdkService.UpdateDevice(device)
 	}
 	return nil
+}
+
+// updateDeviceName will attempt to remove an existing device and re-add it under its proper name
+func (d *Driver) updateDeviceName(device models.Device) error {
+	d.lc.Infof("Removing device '%s' to update device with the updated name", device.Name)
+	err := d.sdkService.RemoveDeviceByName(device.Name)
+	if err != nil {
+		d.lc.Warnf("An error occurred while removing the device %s: %s",
+			device.Name, err)
+		return err
+	}
+
+	device.Id = "" // clear the Id field to treat as new device
+	device.Name = computeDeviceName(device)
+	d.lc.Infof("Adding device back with the updated name '%s'", device.Name)
+	_, err = d.sdkService.AddDevice(device)
+	return err
+}
+
+// computeDeviceName generates the device name based on the Manufacturer, Model, and EndpointRefAddress
+func computeDeviceName(device models.Device) string {
+	// Spaces are not allowed in the device name, replace them with "-"
+	return fmt.Sprintf("%s-%s-%s",
+		strings.ReplaceAll(device.Protocols[OnvifProtocol][Manufacturer], " ", "-"),
+		strings.ReplaceAll(device.Protocols[OnvifProtocol][Model], " ", "-"),
+		device.Protocols[OnvifProtocol][EndpointRefAddress])
 }
