@@ -171,12 +171,12 @@ func TestOnvifDiscovery_makeDeviceMap(t *testing.T) {
 	for _, test := range tests {
 		test := test
 		t.Run(test.name, func(t *testing.T) {
-			mockService, driver := createDriverWithMockService()
+			driver, mockService := createDriverWithMockService()
 			mockService.On("Devices").
 				Return(test.devices).Once()
 			mockService.On("Name").
 				Return("device-onvif-camera").Times(test.nameCalls)
-			devices := driver.makeDeviceMap()
+			devices := driver.makeDeviceRefMap()
 			mockService.AssertExpectations(t)
 
 			assert.Equal(t, devices, test.deviceMap)
@@ -196,7 +196,7 @@ func TestOnvifDiscovery_discoveryFilter(t *testing.T) {
 			name:              "No new devices",
 			devices:           createTestDeviceList(),
 			discoveredDevices: createDiscoveredList(),
-			filtered:          []sdkModel.DiscoveredDevice(nil),
+			filtered:          []sdkModel.DiscoveredDevice{},
 			nameCalls:         4,
 		},
 		{
@@ -276,11 +276,11 @@ func TestOnvifDiscovery_discoveryFilter(t *testing.T) {
 	for _, test := range tests {
 		test := test
 		t.Run(test.name, func(t *testing.T) {
-			mockService, driver := createDriverWithMockService()
+			driver, mockService := createDriverWithMockService()
 			mockService.On("Devices").
-				Return(test.devices).Once()
+				Return(test.devices).Times(2)
 			mockService.On("Name").
-				Return("device-onvif-camera").Times(test.nameCalls)
+				Return("device-onvif-camera").Times(2 * test.nameCalls)
 			filtered := driver.discoverFilter(test.discoveredDevices)
 			mockService.AssertExpectations(t)
 
@@ -303,7 +303,7 @@ func TestOnvifDiscovery_discoveryFilter(t *testing.T) {
 // 	return *device
 // }
 
-// func TestDriver_createDiscoveredDevice(t *testing.T) {
+// func TestmockService_createDiscoveredDevice(t *testing.T) {
 // 	tests := []struct {
 // 		name             string
 // 		device           onvif.Device
@@ -332,11 +332,11 @@ func TestOnvifDiscovery_discoveryFilter(t *testing.T) {
 // 	for _, test := range tests {
 // 		test := test
 // 		t.Run(test.name, func(t *testing.T) {
-// 			driver := Driver{
+// 			mockService := mockService{
 // 				lc:       logger.NewMockClient(),
 // 				configMu: &sync.RWMutex{},
 // 			}
-// 			actualDevice, err := driver.createDiscoveredDevice(test.device)
+// 			actualDevice, err := mockService.createDiscoveredDevice(test.device)
 // 			if test.errorExpected {
 // 				assert.Error(t, err)
 // 				return
