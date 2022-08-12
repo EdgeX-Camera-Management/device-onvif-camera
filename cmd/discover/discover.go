@@ -24,13 +24,21 @@ func main() {
 	os.Setenv("WRITABLE_LOGLEVEL", "TRACE")
 	os.Setenv("DEVICE_PROFILESDIR", "cmd/res/profiles")
 	os.Setenv("DEVICE_DEVICESDIR", "cmd/res/devices")
+	os.Setenv("SERVICE_PORT", "55555")
 	os.Args = []string{"discover", "-c", "cmd/res"}
 	go startup.Bootstrap("discover-test", device_camera.Version, d)
 	lc := logger.NewClient("discover-test", "TRACE")
 
+	//t0 := time.Now()
+	//onvifDevices := wsdiscovery.GetAvailableDevicesAtSpecificEthernetInterface("eth0")
+	//lc.Infof("Discovered %d device(s) in %v via multicast.", len(onvifDevices), time.Since(t0))
+	//for _, onvifDevice := range onvifDevices {
+	//	fmt.Printf("%v\n", onvifDevice)
+	//}
+
 	params := netscan.Params{
 		// split the comma separated string here to avoid issues with EdgeX's Consul implementation
-		Subnets:         strings.Split("10.0.0.0/24", ","),
+		Subnets:         strings.Split("192.168.10.0/24", ","),
 		AsyncLimit:      4000,
 		Timeout:         time.Duration(2000) * time.Millisecond,
 		ScanPorts:       []string{"3702"},
