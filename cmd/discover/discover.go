@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"fmt"
+	wsdiscovery "github.com/IOTechSystems/onvif/ws-discovery"
 	device_camera "github.com/edgexfoundry/device-onvif-camera"
 	"github.com/edgexfoundry/device-onvif-camera/internal/driver"
 	"github.com/edgexfoundry/device-onvif-camera/internal/netscan"
@@ -29,16 +31,16 @@ func main() {
 	go startup.Bootstrap("discover-test", device_camera.Version, d)
 	lc := logger.NewClient("discover-test", "TRACE")
 
-	//t0 := time.Now()
-	//onvifDevices := wsdiscovery.GetAvailableDevicesAtSpecificEthernetInterface("eth0")
-	//lc.Infof("Discovered %d device(s) in %v via multicast.", len(onvifDevices), time.Since(t0))
-	//for _, onvifDevice := range onvifDevices {
-	//	fmt.Printf("%v\n", onvifDevice)
-	//}
+	t0 := time.Now()
+	onvifDevices := wsdiscovery.GetAvailableDevicesAtSpecificEthernetInterface("enp4s0")
+	lc.Infof("Discovered %d device(s) in %v via multicast.", len(onvifDevices), time.Since(t0))
+	for _, onvifDevice := range onvifDevices {
+		fmt.Printf("%v\n", onvifDevice)
+	}
 
 	params := netscan.Params{
 		// split the comma separated string here to avoid issues with EdgeX's Consul implementation
-		Subnets:         strings.Split("192.168.10.0/24", ","),
+		Subnets:         strings.Split("192.168.11.0/24", ","),
 		AsyncLimit:      4000,
 		Timeout:         time.Duration(2000) * time.Millisecond,
 		ScanPorts:       []string{"3702"},
@@ -46,12 +48,12 @@ func main() {
 		NetworkProtocol: netscan.NetworkUDP,
 	}
 
-	t0 := time.Now()
+	t1 := time.Now()
 	result := netscan.AutoDiscover(ctx, driver.NewOnvifProtocolDiscovery(d), params)
 	if ctx.Err() != nil {
 		lc.Warnf("Discover process has been cancelled!", "ctxErr", ctx.Err())
 	}
 
 	lc.Debugf("NetScan result: %+v", result)
-	lc.Infof("Discovered %d device(s) in %v via netscan.", len(result), time.Since(t0))
+	lc.Infof("Discovered %d device(s) in %v via netscan.", len(result), time.Since(t1))
 }
