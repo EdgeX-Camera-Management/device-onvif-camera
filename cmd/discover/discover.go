@@ -2,8 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
-	wsdiscovery "github.com/IOTechSystems/onvif/ws-discovery"
 	device_camera "github.com/edgexfoundry/device-onvif-camera"
 	"github.com/edgexfoundry/device-onvif-camera/internal/driver"
 	"github.com/edgexfoundry/device-onvif-camera/internal/netscan"
@@ -31,12 +29,12 @@ func main() {
 	go startup.Bootstrap("discover-test", device_camera.Version, d)
 	lc := logger.NewClient("discover-test", "TRACE")
 
-	t0 := time.Now()
-	onvifDevices := wsdiscovery.GetAvailableDevicesAtSpecificEthernetInterface("enp4s0")
-	lc.Infof("Discovered %d device(s) in %v via multicast.", len(onvifDevices), time.Since(t0))
-	for _, onvifDevice := range onvifDevices {
-		fmt.Printf("%v\n", onvifDevice)
-	}
+	//t0 := time.Now()
+	//onvifDevices := wsdiscovery.GetAvailableDevicesAtSpecificEthernetInterface("enp4s0")
+	//lc.Infof("Discovered %d device(s) in %v via multicast.", len(onvifDevices), time.Since(t0))
+	//for _, onvifDevice := range onvifDevices {
+	//	fmt.Printf("%v\n", onvifDevice)
+	//}
 
 	params := netscan.Params{
 		// split the comma separated string here to avoid issues with EdgeX's Consul implementation
