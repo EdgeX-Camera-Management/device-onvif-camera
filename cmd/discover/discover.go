@@ -25,6 +25,7 @@ func main() {
 	os.Setenv("DEVICE_PROFILESDIR", "cmd/res/profiles")
 	os.Setenv("DEVICE_DEVICESDIR", "cmd/res/devices")
 	os.Setenv("SERVICE_PORT", "55555")
+	os.Setenv("APPCUSTOM_DISCOVERYINTERFACE", "enp4s0")
 	os.Args = []string{"discover", "-c", "cmd/res"}
 	go startup.Bootstrap("discover-test", device_camera.Version, d)
 	lc := logger.NewClient("discover-test", "TRACE")
