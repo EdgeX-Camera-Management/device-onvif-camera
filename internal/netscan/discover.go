@@ -34,6 +34,25 @@ func AutoDiscover(ctx context.Context, proto ProtocolSpecificDiscovery, params P
 		return nil
 	}
 
+	resultCh := ExecuteProbes(ctx, proto, params)
+
+	// this blocks until the resultCh is closed in above go routine
+	return processResultChannel(resultCh, proto, params)
+}
+
+// ExecuteProbes will probe all addresses in the configured network and return a channel
+// to process the ProbeResults. This is done in the background and will automatically close
+// the result channel when all probes have completed. The best way to handle the result channel is
+// to use something like:
+//
+//		for result := range resultCh {
+//			...
+//	    }
+//
+// that will block and automatically stop looping when the resultCh is closed. The reason this code
+// has been broken out from AutoDiscover is to allow executing the probes but manually process the
+// results, which allows the code to be re-used in other ways such as standalone discovery utils.
+func ExecuteProbes(ctx context.Context, proto ProtocolSpecificDiscovery, params Params) chan []ProbeResult {
 	ipnets := make([]*net.IPNet, 0, len(params.Subnets))
 	var estimatedProbes int
 	for _, cidr := range params.Subnets {
@@ -136,8 +155,7 @@ func AutoDiscover(ctx context.Context, proto ProtocolSpecificDiscovery, params P
 		close(resultCh)
 	}()
 
-	// this blocks until the resultCh is closed in above go routine
-	return processResultChannel(resultCh, proto, params)
+	return resultCh
 }
 
 // processResultChannel reads all incoming results until the resultCh is closed.

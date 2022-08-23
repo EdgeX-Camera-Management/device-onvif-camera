@@ -1,4 +1,4 @@
-.PHONY: build docker test clean prepare update openapi
+.PHONY: build docker test clean prepare update openapi discover
 
 #GOOS=linux
 
@@ -51,7 +51,7 @@ tidy:
 	go mod tidy
 
 unittest:
-	$(GOCGO) test ./... -coverprofile=coverage.out ./...
+	$(GOCGO) test ./... -coverprofile=coverage.out
 
 lint:
 	@which golangci-lint >/dev/null || echo "WARNING: go linter not installed. To install, run\n  curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b \$$(go env GOPATH)/bin v1.46.2"
@@ -81,3 +81,6 @@ vendor:
 
 openapi:
 	$(MAKE) -C doc/openapi gen
+
+discover:
+	$(GOCGO) run $(CGOFLAGS) ./cmd/discover
