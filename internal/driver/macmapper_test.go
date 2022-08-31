@@ -215,20 +215,22 @@ func TestMACAddressMapper_UpdateMappings(t *testing.T) {
 			},
 		},
 		{
-			name: "Add invalid macs",
+			name: "multiple valid creds",
 			currentMap: map[string]string{
-				"creds3": "FF:EE:DD:CC:BB:AA,asbc,asdf",
-				"creds1": "AA:BB:CC:DD:EE:FF",
+				"creds1": "aa:bb:cc:dd:ee:ff,12:23:34:45:56:11,a1:b2:c3:d4:e5:f6",
 				"creds2": "11:22:33:44:55:66",
+				"creds3": "ff:ee:dd:cc:bb:aa",
 			},
 			expected: map[string]string{
 				"aa:bb:cc:dd:ee:ff": "creds1",
+				"12:23:34:45:56:11": "creds1",
+				"a1:b2:c3:d4:e5:f6": "creds1",
 				"11:22:33:44:55:66": "creds2",
 				"ff:ee:dd:cc:bb:aa": "creds3",
 			},
 		},
 		{
-			name: "invalid macs",
+			name: "Add invalid macs",
 			currentMap: map[string]string{
 				"creds3": "FF:EE:DD:CC:BB:AA,asbc,asdf",
 				"creds1": "AA:BB:CC:DD:EE:FF",
@@ -265,11 +267,9 @@ func TestMACAddressMapper_UpdateMappings(t *testing.T) {
 			driver.macAddressMapper = NewMACAddressMapper(mockService)
 			driver.macAddressMapper.credsMap = test.currentMap
 			mockSecretProvider := &mocks.SecretProvider{}
-			mockLoggingClient := logger.MockLogger{}
+			mockLoggingClient := logger.NewMockClient()
 
-			if len(test.currentMap) == 0 {
-				return
-			}
+			require.NotEmpty(t, test.currentMap)
 
 			for secretPath := range test.currentMap {
 				if strings.ToLower(secretPath) != noAuthSecretPath {
@@ -283,87 +283,13 @@ func TestMACAddressMapper_UpdateMappings(t *testing.T) {
 			mockService.On("GetLoggingClient").Return(mockLoggingClient)
 			driver.macAddressMapper.UpdateMappings(test.currentMap)
 
-			if test.name == "duplicate macs" {
+			if test.alternateExpected != nil {
 				ex1 := reflect.DeepEqual(test.expected, driver.macAddressMapper.credsMap)
 				ex2 := reflect.DeepEqual(test.alternateExpected, driver.macAddressMapper.credsMap)
-				assert.Equal(t, true, (ex1 || ex2))
+				assert.True(t, ex1 || ex2)
 				return
 			}
 			assert.Equal(t, test.expected, driver.macAddressMapper.credsMap)
-		})
-	}
-}
-
-// TestMACAddressMapperListMACAddresses verifies the correct list of MAC addresses are returned that have credentials attached to them.
-func TestMACAddressMapperListMACAddresses(t *testing.T) {
-	tests := []struct {
-		name     string
-		credMap  map[string]string
-		expected []string
-	}{
-		{
-			name: "single entry",
-			credMap: map[string]string{
-				"AA:BB:CC:DD:EE:FF": "creds1",
-			},
-			expected: []string{
-				"AA:BB:CC:DD:EE:FF",
-			},
-		},
-		{
-			name: "double entry same path",
-			credMap: map[string]string{
-				"AA:BB:CC:DD:EE:FF": "creds1",
-				"11:22:33:44:55:66": "creds1",
-			},
-			expected: []string{
-				"AA:BB:CC:DD:EE:FF",
-				"11:22:33:44:55:66",
-			},
-		},
-		{
-			name: "double entry different path",
-			credMap: map[string]string{
-				"AA:BB:CC:DD:EE:FF": "creds1",
-				"11:22:33:44:55:66": "creds2",
-			},
-			expected: []string{
-				"AA:BB:CC:DD:EE:FF",
-				"11:22:33:44:55:66",
-			},
-		},
-		{
-			name: "many entries different paths",
-			credMap: map[string]string{
-				"AA:BB:CC:DD:EE:FF": "creds1",
-				"11:22:33:44:55:66": "creds2",
-				"AA:BB:CC:FF:EE:DD": "creds1",
-				"FF:EE:DD:CC:BB:AA": "creds1",
-				"66:55:44:33:22:11": "creds2",
-			},
-			expected: []string{
-				"AA:BB:CC:DD:EE:FF",
-				"11:22:33:44:55:66",
-				"AA:BB:CC:FF:EE:DD",
-				"FF:EE:DD:CC:BB:AA",
-				"66:55:44:33:22:11",
-			},
-		},
-		{
-			name:     "no entries",
-			credMap:  map[string]string{},
-			expected: []string{},
-		},
-	}
-	for _, test := range tests {
-		test := test
-		t.Run(test.name, func(t *testing.T) {
-			m := &MACAddressMapper{
-				credsMu:  sync.RWMutex{},
-				credsMap: test.credMap,
-			}
-			actual := m.ListMACAddresses()
-			assert.ElementsMatch(t, test.expected, actual)
 		})
 	}
 }
