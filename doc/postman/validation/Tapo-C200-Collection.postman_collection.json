@@ -1,0 +1,1825 @@
+{
+	"info": {
+		"_postman_id": "40474b92-3cbc-418c-a7ed-9f75371b1970",
+		"name": "Tapo-C200-Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "System Function",
+			"item": [
+				{
+					"name": "Get all devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{metadata_host}}:{{metadata_port}}/api/v2/device/service/name/{{device_service_name}}",
+							"protocol": "http",
+							"host": [
+								"{{metadata_host}}"
+							],
+							"port": "{{metadata_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"service",
+								"name",
+								"{{device_service_name}}"
+							]
+						},
+						"description": "To get all onvif devices change {device_service_name} environment varibale to device-onvif-camera"
+					},
+					"response": []
+				},
+				{
+					"name": "Get device information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/DeviceInformation",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DeviceInformation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get system date and time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/SystemDateAndTime",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"SystemDateAndTime"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Network Configuration",
+			"item": [
+				{
+					"name": "Get host name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/Hostname",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Hostname"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network interfaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/NetworkInterfaces",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkInterfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network protocols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/NetworkProtocols",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkProtocols"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DNS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/DNS",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DNS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network default gateway",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/NetworkDefaultGateway",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkDefaultGateway"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Video Streaming",
+			"item": [
+				{
+					"name": "Get profiles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"// saving the API Response as a variable",
+									"let response = pm.response.json();",
+									"profiles = response.event.readings[0].objectValue.Profiles;",
+									"pm.collectionVariables.set('profiles', profiles);",
+									"profiles.forEach(profile => {",
+									"    console.log(profile.Token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/Profiles",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get stream uri for profile1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"uri_enc\", btoa(JSON.stringify({",
+									"    \"StreamSetup\" : {",
+									"        \"Stream\" : \"RTP-Multicast\",",
+									"        \"Transport\" : {",
+									"            \"Protocol\" : \"RTSP\"",
+									"        }",
+									"    },",
+									"    \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/StreamUri?jsonObject={{uri_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"StreamUri"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{uri_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						},
+						"description": "Test steps:\n\n1\\. Get profile token by executing get profiles API\n\n2\\. Update profile_token env variable in postman with value retrieved in above step"
+					},
+					"response": []
+				},
+				{
+					"name": "Get stream uri  for profile2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"uri_enc\", btoa(JSON.stringify({",
+									"    \"StreamSetup\" : {",
+									"        \"Stream\" : \"RTP-Multicast\",",
+									"        \"Transport\" : {",
+									"            \"Protocol\" : \"RTSP\"",
+									"        }",
+									"    },",
+									"    \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[1].Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/StreamUri?jsonObject={{uri_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"StreamUri"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{uri_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						},
+						"description": "Test steps:\n\n1\\. Get profile token by executing get profiles API\n\n2\\. Update profile_token env variable in postman with value retrieved in above step"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Meta data configuration",
+			"item": [
+				{
+					"name": "Get metadata configurations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/MetadataConfigurations",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"MetadataConfigurations"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auto Discovery",
+			"item": [
+				{
+					"name": "Get discovery mode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/DiscoveryMode",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set discovery mode to 'NonDiscoverable\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DiscoveryMode\": {\n        \"DiscoveryMode\": \"NonDiscoverable\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/DiscoveryMode",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set discovery mode to 'Discoverable\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DiscoveryMode\": {\n        \"DiscoveryMode\": \"Discoverable\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/DiscoveryMode",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get scopes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/Scopes",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Scopes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Video Encoder Configuration",
+			"item": [
+				{
+					"name": "Get video encoder configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"videoencoder_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].VideoEncoderConfiguration.Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/VideoEncoderConfiguration?jsonObject={{videoencoder_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"VideoEncoderConfiguration"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{videoencoder_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						},
+						"description": "Test steps:\n\n1\\. Get video encoder configuration token by executing get profiles API\n2. Update configuration_token env variable in postman with value retrieved in above step"
+					},
+					"response": []
+				},
+				{
+					"name": "Get video encoder configuration options",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"pm.collectionVariables.set(\"videoencoder_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].VideoEncoderConfiguration.Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* Test steps\n1) Get video encoder configuration token by executing get profiles API\n2) Update configuration_token env variable in postman with value retrieved in above step\n*/",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/VideoEncoderConfiguration?jsonObject={{videoencoder_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"VideoEncoderConfiguration"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{videoencoder_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Handling",
+			"item": [
+				{
+					"name": "Get Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/Users",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PTZ configuration",
+			"item": [
+				{
+					"name": "PTZ- Get nodes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"// saving the API Response as a variable",
+									"let response = pm.response.json();",
+									"GetNodes = response.event.readings[0].objectValue.PTZNode;",
+									"pm.collectionVariables.set('GetNodes', GetNodes);",
+									"console.log(GetNodes[0].Token)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/GetNodes",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"GetNodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ- Get specific node",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let GetNodes = pm.collectionVariables.get(\"GetNodes\");",
+									" ",
+									"",
+									"pm.collectionVariables.set(\"node_enc\", btoa(JSON.stringify({",
+									"    \"NodeToken\" : pm.collectionVariables.get('GetNodes')[0].Token",
+									"})));",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* Test steps\n1) Get Node token token by executing get nodes API\n2) Update node_token env variable in postman with value retrieved in above step\n*/",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/GetNode?jsonObject={{node_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"GetNode"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{node_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ- Get configurations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/GetConfigurations",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"GetConfigurations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ- Get specific configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"pm.collectionVariables.set(\"ptz_enc\", btoa(JSON.stringify({",
+									"    \"PTZConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].PTZConfiguration.Token",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* Test steps\n1) Get PTZ configuration token by executing get configurations API\n2) Update ptz_token env variable in postman with value retrieved in above step\n*/",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/Configuration?jsonObject={{ptz_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Configuration"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{ptz_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PTZ Actuation",
+			"item": [
+				{
+					"name": "PTZ- Get status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"pm.collectionVariables.set(\"profile_enc\", btoa(JSON.stringify({",
+									"     \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "/* Test steps\n\nThis API is to request PTZ status for the Node in the selected profile.\n1) Get profile token token by executing get profiles API\n9) Update profile_token env variable in postman with value retrieved in above step\n*/",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/GetStatus?jsonObject={{profile_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"GetStatus"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{profile_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ-Absolute move",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AbsoluteMove\": {\n        \"ProfileToken\": \"profile_1\",\n        \"Position\": {\n            \"PanTilt\": {\n                \"Space\": \"http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace\",\n                \"X\": 149,\n                \"Y\": 24\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/AbsoluteMove",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AbsoluteMove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ-Continuos move",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ContinuousMove\": {\n        \"ProfileToken\": \"profile_1\",\n        \"Velocity\": {\n            \"PanTilt\": {\n                \"x\":  -1,\n                \"y\":  1\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/ContinuousMove",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"ContinuousMove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ-Relative move",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"RelativeMove\" : {\n        \"ProfileToken\" : \"profile_1\",\n        \"Translation\" : {\n            \"PanTilt\" : {\n                \"x\" :   1,\n                \"y\" :   1\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/RelativeMove",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"RelativeMove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ-Stop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Stop\": {\n        \"ProfileToken\": \"profile_1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/Stop",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ- Get presets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"profile_enc\", btoa(JSON.stringify({",
+									"    \"ProfileToken\": pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/GetPresets?jsonObject={{profile_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"GetPresets"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{profile_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ-Set preset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"SetPreset\": {\n        \"ProfileToken\": \"profile_1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/SetPreset",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"SetPreset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ- Go to preset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"GotoPreset\": {\n        \"ProfileToken\": \"profile_1\",\n        \"PresetToken\": \"Preset1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/GotoPreset",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"GotoPreset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PTZ- Remove preset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"RemovePreset\": {\n        \"ProfileToken\": \"profile_1\",\n        \"PresetToken\": \"Preset1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/RemovePreset",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"RemovePreset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "profile_enc",
+			"value": ""
+		},
+		{
+			"key": "ptz_enc",
+			"value": ""
+		},
+		{
+			"key": "node_enc",
+			"value": ""
+		},
+		{
+			"key": "videoencoder_enc",
+			"value": ""
+		},
+		{
+			"key": "uri_enc",
+			"value": ""
+		},
+		{
+			"key": "profiles",
+			"value": ""
+		},
+		{
+			"key": "GetNodes",
+			"value": ""
+		},
+		{
+			"key": "profile",
+			"value": ""
+		}
+	]
+}
