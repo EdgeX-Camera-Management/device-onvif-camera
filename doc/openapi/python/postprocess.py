@@ -132,14 +132,14 @@ class YamlProcessor:
                     for code, resp_obj in self.sidecar['responses']['canned'].items():
                         if code not in method_obj['responses']:
                             method_obj['responses'][code] = resp_obj
-                        elif code == '200':
-                            content = method_obj['responses']['200']['content']
-                            if 'application/json' not in content or \
-                                    len(content['application/json']) == 0 or \
-                                    ('example' in content['application/json'] and len(
-                                        content['application/json']['example']) == 2):
-                                print(f'Overriding empty 200 response for {service_fn}')
-                                method_obj['responses'][code] = resp_obj
+                        # elif code == '200':
+                        #     content = method_obj['responses']['200']['content']
+                        #     if 'application/json' not in content or \
+                        #             len(content['application/json']) == 0 or \
+                        #             ('example' in content['application/json'] and len(
+                        #                 content['application/json']['example']) == 2):
+                        #         print(f'Overriding empty 200 response for {service_fn}')
+                        #         method_obj['responses'][code] = resp_obj
 
                     if service == EDGEX:
                         # --- Custom EdgeX function patching ---
