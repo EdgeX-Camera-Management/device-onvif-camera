@@ -754,29 +754,11 @@ deviceResources:
     properties:
       valueType: "Object"
       readWrite: "R"
-  - name: "AnalyticsCapabilities"
-    isHidden: false
-    description: "Camera Analytics Service Capabilities"
-    attributes:
-      service: "Analytics"
-      getFunction: "GetServiceCapabilities"
-    properties:
-      valueType: "Object"
-      readWrite: "R"
   - name: "MediaCapabilities"
     isHidden: false
     description: "Camera Media Service Capabilities"
     attributes:
       service: "Media"
-      getFunction: "GetServiceCapabilities"
-    properties:
-      valueType: "Object"
-      readWrite: "R"
-  - name: "Media2Capabilities"
-    isHidden: false
-    description: "Camera Media2 Service Capabilities"
-    attributes:
-      service: "Media2"
       getFunction: "GetServiceCapabilities"
     properties:
       valueType: "Object"
