@@ -287,7 +287,8 @@ The following table shows the Onvif functions tested for various Onvif cameras:
 ### VideoEncoder Config
 | Onvif Web Service | Onvif Function                      | Hikvision DFI6256TE | Tapo C200 | BOSCH DINION IP starlight 6000 HD | GeoVision GV-BX8700 | Happytime Simulator |
 |-------------------|-------------------------------------|---------------------|-----------|-----------------------------------|---------------------|---------------------|
-| **Media**         | GetVideoEncoderConfiguration        | ✔                   | ✔         | ✔                                 | ✔                   |                     |
+| **Media**         | GetVideoEncoderConfigurations       |                     |           |                                   |                     |                     |
+|                   | GetVideoEncoderConfiguration        | ✔                   | ✔         | ✔                                 | ✔                   |                     |
 |                   | SetVideoEncoderConfiguration        | ✔                   | ❌         | ✔                                 | ✔                   |                     |
 |                   | GetVideoEncoderConfigurationOptions | ✔                   | ✔         | ✔                                 | ✔                   |                     |
 
@@ -348,7 +349,6 @@ The following table shows the Onvif functions tested for various Onvif cameras:
 |                   | MessageContentFilter        | ❌                   | ❌         | ❌                                 | ❌                   |                     |
 |                   | GetEventProperties          |                     | ✔         |                                   |                     |                     |
 
-GetEventProperties
 ### Analytics Profile Configuration
 | Onvif Web Service | Onvif Function             | Hikvision DFI6256TE | Tapo C200 | BOSCH DINION IP starlight 6000 HD | GeoVision GV-BX8700 | Happytime Simulator |
 |-------------------|----------------------------|---------------------|-----------|-----------------------------------|---------------------|---------------------|
