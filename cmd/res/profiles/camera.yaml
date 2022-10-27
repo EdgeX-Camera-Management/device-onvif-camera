@@ -80,6 +80,15 @@ deviceResources:
       readWrite: "RW"
   - name: "SetSystemFactoryDefault"
     isHidden: false
+    description: "**DEPRECATED** See: SystemFactoryDefault"
+    attributes:
+      service: "Device"
+      setFunction: "SetSystemFactoryDefault"
+    properties:
+      valueType: "Object"
+      readWrite: "W"
+  - name: "SystemFactoryDefault"
+    isHidden: false
     description: "This operation reloads the parameters on the camera to their factory default values."
     attributes:
       service: "Device"
@@ -235,6 +244,15 @@ deviceResources:
   # Video Encoder Configuration
   - name: "GetVideoEncoderConfigurations"
     isHidden: false
+    description: "**DEPRECATED** See: VideoEncoderConfigurations"
+    attributes:
+      service: "Media"
+      getFunction: "GetVideoEncoderConfigurations"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "VideoEncoderConfigurations"
+    isHidden: false
     description: "Camera VideoEncoderConfigurations"
     attributes:
       service: "Media"
@@ -344,6 +362,15 @@ deviceResources:
   # PTZ Configuration
   - name: "GetNodes"
     isHidden: false
+    description: "**DEPRECATED** See: Nodes"
+    attributes:
+      service: "PTZ"
+      getFunction: "GetNodes"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "Nodes"
+    isHidden: false
     description: "Get the descriptions of the available PTZ Nodes."
     attributes:
       service: "PTZ"
@@ -353,6 +380,15 @@ deviceResources:
       readWrite: "R"
   - name: "GetNode"
     isHidden: false
+    description: "**DEPRECATED** See: Node"
+    attributes:
+      service: "PTZ"
+      getFunction: "GetNode"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "Node"
+    isHidden: false
     description: "Get a specific PTZ Node identified by a reference token or a name."
     attributes:
       service: "PTZ"
@@ -361,6 +397,15 @@ deviceResources:
       valueType: "Object"
       readWrite: "R"
   - name: "GetConfigurations"
+    isHidden: false
+    description: "**DEPRECATED** See Configurations"
+    attributes:
+      service: "PTZ"
+      getFunction: "GetConfigurations"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "Configurations"
     isHidden: false
     description: "Get all the existing PTZ configurations from the device."
     attributes:
@@ -380,6 +425,15 @@ deviceResources:
       valueType: "Object"
       readWrite: "RW"
   - name: "GetConfigurationOptions"
+    isHidden: false
+    description: "**DEPRECATED** See: ConfigurationOptions"
+    attributes:
+      service: "PTZ"
+      getFunction: "GetConfigurationOptions"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "ConfigurationOptions"
     isHidden: false
     description: "List supported coordinate systems including their range limitations."
     attributes:
@@ -446,6 +500,15 @@ deviceResources:
       readWrite: "W"
   - name: "GetStatus"
     isHidden: false
+    description: "**DEPRECATED** See: Status"
+    attributes:
+      service: "PTZ"
+      getFunction: "GetStatus"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "Status"
+    isHidden: false
     description: "Operation to request PTZ status for the Node in the selected profile."
     attributes:
       service: "PTZ"
@@ -457,6 +520,15 @@ deviceResources:
   # PTZ Preset
   - name: "SetPreset"
     isHidden: false
+    description: "**DEPRECATED** See: Preset"
+    attributes:
+      service: "PTZ"
+      setFunction: "SetPreset"
+    properties:
+      valueType: "Object"
+      readWrite: "W"
+  - name: "Preset"
+    isHidden: false
     description: "The SetPreset command saves the current device position parameters so that the device can move to the saved preset position through the GotoPreset operation."
     attributes:
       service: "PTZ"
@@ -465,6 +537,15 @@ deviceResources:
       valueType: "Object"
       readWrite: "W"
   - name: "GetPresets"
+    isHidden: false
+    description: "**DEPRECATED** See Presets"
+    attributes:
+      service: "PTZ"
+      getFunction: "GetPresets"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "Presets"
     isHidden: false
     description: "Operation to request all PTZ presets for the PTZNode in the selected profile."
     attributes:
@@ -504,6 +585,15 @@ deviceResources:
       readWrite: "W"
   - name: "SetHomePosition"
     isHidden: false
+    description: "**DEPRECATED** See: HomePosition"
+    attributes:
+      service: "PTZ"
+      setFunction: "SetHomePosition"
+    properties:
+      valueType: "Object"
+      readWrite: "W"
+  - name: "HomePosition"
+    isHidden: false
     description: "Operation to save current position as the home position."
     attributes:
       service: "PTZ"
@@ -525,6 +615,15 @@ deviceResources:
 
   # Event Handling
   - name: "GetEventProperties"
+    isHidden: true
+    description: "**DEPRECATED** See: EventProperties"
+    attributes:
+      service: "Event"
+      getFunction: "GetEventProperties"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "EventProperties"
     isHidden: true
     description: "This resource is used to find out what event a camera supports and what information they contain"
     attributes:
@@ -603,6 +702,15 @@ deviceResources:
 
   - name: "GetAnalyticsConfigurations"
     isHidden: false
+    description: "**DEPRECATED** See: AnalyticsConfigurations"
+    attributes:
+      service: "Media2"
+      getFunction: "GetAnalyticsConfigurations"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "AnalyticsConfigurations"
+    isHidden: false
     description: "Lists all existing video analytics configurations for a device."
     attributes:
       service: "Media2"
@@ -633,6 +741,15 @@ deviceResources:
 
   # Analytics Module configuration
   - name: "GetSupportedAnalyticsModules"
+    isHidden: false
+    description: "**DEPRECATED** See: SupportedAnalyticsModules"
+    attributes:
+      service: "Analytics"
+      getFunction: "GetSupportedAnalyticsModules"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "SupportedAnalyticsModules"
     isHidden: false
     description: "List all analytics modules that are supported by the given VideoAnalyticsConfiguration."
     attributes:
@@ -675,6 +792,15 @@ deviceResources:
 
   - name: "GetAnalyticsModuleOptions"
     isHidden: false
+    description: "**DEPRECATED** See: AnalyticsModuleOptions"
+    attributes:
+      service: "Analytics"
+      getFunction: "GetAnalyticsModuleOptions"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "AnalyticsModuleOptions"
+    isHidden: false
     description: "Return the options for the supported analytics modules that specify an Option attribute."
     attributes:
       service: "Analytics"
@@ -685,6 +811,15 @@ deviceResources:
 
   # Rule configuration
   - name: "GetSupportedRules"
+    isHidden: false
+    description: "**DEPRECATED** See: SupportedRules"
+    attributes:
+      service: "Analytics"
+      getFunction: "GetSupportedRules"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "SupportedRules"
     isHidden: false
     description: "List all rules that are supported by the given VideoAnalyticsConfiguration."
     attributes:
@@ -726,6 +861,15 @@ deviceResources:
       readWrite: "W"
 
   - name: "GetRuleOptions"
+    isHidden: false
+    description: "**DEPRECATED** See: RuleOptions"
+    attributes:
+      service: "Analytics"
+      getFunction: "GetRuleOptions"
+    properties:
+      valueType: "Object"
+      readWrite: "R"
+  - name: "RuleOptions"
     isHidden: false
     description: "Return the options for the supported rules that specify an Option attribute."
     attributes:
