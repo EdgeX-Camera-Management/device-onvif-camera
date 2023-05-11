@@ -1,7 +1,7 @@
 # Copyright (C) 2022-2023 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
-.PHONY: gen install clean
+.PHONY: gen install clean mappings
 
 SHELL := /bin/bash
 
@@ -42,3 +42,6 @@ $(SERVICES:%=ref/out/%.yaml) : ref/out/%.yaml : ref/%.yaml python/xmlstrip.py | 
 
 clean:
 	rm -rf ref/out tmp $(SCHEMA_TEMP_JSON) $(EXTRACTED_SCHEMA)
+
+mappings: $(PROFILE_FILE)
+	python3 python/onvifmappings.py $(PROFILE_FILE) tmp/mappings.md
