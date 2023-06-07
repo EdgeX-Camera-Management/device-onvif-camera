@@ -1,0 +1,2926 @@
+{
+	"info": {
+		"_postman_id": "f1156542-ea0c-45bc-9636-7a11de4bb483",
+		"name": "Minnesota-Release-Bosch-Dinion-IP-Starlight-6000HD-Collection",
+		"description": "## Overview :\n\nThe purpose of this collection to validate all supporting APIs between Edgex Onvif Device Service and Onvif Bosch Camera.\n\n###### Onvif Camera model : ***`BOSCH DINION IP starlight 6000 HD`***\n\n###### Collection Name : `Bosch-Dinion-IP-Starlight-6000HD-Collection`\n\n###### Environment Variables : `Bosch-Dinion-IP-Starlight-6000HD_env`\n\n##### In the below link, Those following Onvif APIs for Bosch Onvif Camera to be validated -\n\n[https://github.com/edgexfoundry-holding/device-onvif-camera/blob/main/doc/tested-onvif-camera.md](https://github.com/edgexfoundry-holding/device-onvif-camera/blob/main/doc/tested-onvif-camera.md)\n\n##### In the below link - Features for Onvif camera device supported by Edgex Onvif device service and Onvif Cameras, mainly profile -'S' & 'M' -\n\n[https://github.com/edgexfoundry-holding/device-onvif-camera](https://github.com/edgexfoundry-holding/device-onvif-camera)\n\n## NOTE:\n\n1.  Some APIs are not working as mentioned on ONVIF features, in the above link. Please go through for those APIs documentation details.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "System Function",
+			"item": [
+				{
+					"name": "Get all devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{metadata_host}}:{{metadata_port}}/api/v3/device/all",
+							"protocol": "http",
+							"host": [
+								"{{metadata_host}}"
+							],
+							"port": "{{metadata_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get device information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DeviceInformation",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DeviceInformation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get system date and time",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/SystemDateAndTime",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"SystemDateAndTime"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set system date and time manual",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"SystemDateAndTime\": {\n        \"DateTimeType\": \"Manual\",\n        \"DaylightSavings\": false,\n        \"UTCDateTime\": {\n            \"Time\": {\n                \"Hour\": 7,\n                \"Minute\": 40,\n                \"Second\": 11\n            },\n            \"Date\": {\n                \"Year\": 2022,\n                \"Month\": 3,\n                \"Day\": 30\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/SystemDateAndTime",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"SystemDateAndTime"
+							]
+						},
+						"description": "## Set system date and time API not working as expected .\n\nIssue reproducible on below camera models:  \n  \nCamera : Bosch DINION 6000HD  \n  \nOn Bosch camera, Manual System Data and Time setting not working -\n\nReproduce steps:\n\n1.  Execute get system date and time api to retrieve current camera date and time settings.\n2.  Execute get system date and time to verify updated date and time settings.\n    \n\nExpected result: User able to set date and time settings and set date manually.  \n  \nActual result:  \nOn Bosch camera, Not able to set date manually."
+					},
+					"response": []
+				},
+				{
+					"name": "Set system date and time NTP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"SystemDateAndTime\": {\n        \"DateTimeType\": \"NTP\",\n        \"DaylightSavings\": true\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/SystemDateAndTime",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"SystemDateAndTime"
+							]
+						},
+						"description": "## Set system date and time API not working as expected .\n\nIssue reproducible on below camera models:\n\nCamera : Bosch DINION 6000HD\n\nOn Bosch camera, NTP enable/disable does not work and not able to set date manually.\n\nReproduce steps:\n\n1.  Execute get system date and time api to retrieve current camera date and time settings.\n2.  Enable/disable NTP and try updating system date and time using set system date and time API.\n3.  Execute get system date and time to verify updated date and time settings.\n    \n\nExpected result: User able to set date NTP settings and set date manually.\n\nActual result:\n\nOn Bosch camera, NTP enable/disable does not work and not able to set date manually."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auto Discovery",
+			"item": [
+				{
+					"name": "Get discovery mode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DiscoveryMode",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set discovery mode to 'NonDiscoverable\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DiscoveryMode\": {\n        \"DiscoveryMode\": \"NonDiscoverable\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DiscoveryMode",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set discovery mode to 'Discoverable\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DiscoveryMode\": {\n        \"DiscoveryMode\": \"Discoverable\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DiscoveryMode",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryMode"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get scopes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DiscoveryScopes",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryScopes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Scopes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AddDiscoveryScopes\": {\n        \"ScopeItem\": [\n            \"test.com\"\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AddDiscoveryScopes",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AddDiscoveryScopes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Scopes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"RemoveDiscoveryScopes\": {\n        \"ScopeItem\": [\n            \"test.com\"\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/RemoveDiscoveryScopes",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"RemoveDiscoveryScopes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Scopes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DiscoveryScopes\": {\n        \"ScopeItem\": \"test5.com\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DiscoveryScopes",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DiscoveryScopes"
+							]
+						},
+						"description": "#### Summary of the problem:  \n  \nSet scope API deleting all configurable scopes instead of updating scope item.\n\nIssue reproducible on below camera models:  \n  \nBosch DINION 6000HD  \n  \nReproduce steps:\n\n1.  Execute get scopes rest api to retrieve existing scopes\n2.  If there are no existing 'configurable' scopes, then add 2 new scopes with 'Add scopes' API\n3.  Execute get scopes api and check 2 new configurable scopes have added\n4.  Execute set scopes api to update all configurable scopes with  \n    updated scope item. Attached is the postman screenshot showing how we  \n    are executing 'set scopes' api.\n    \n\nExpected result: all configurable scopes updated correctly with desired scope item mentioned in 'set scopes' command  \n  \nActual result: Deletes all configurable scopes\n\nNote: Not getting any error after executing ' set scopes' api, it gives 200/success message."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Video Streaming",
+			"item": [
+				{
+					"name": "Get profiles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"// saving the API Response as a variable",
+									"let response = pm.response.json();",
+									"profiles = response.event.readings[0].objectValue.Profiles;",
+									"pm.collectionVariables.set('profiles', profiles);",
+									"profiles.forEach(profile => {",
+									"    console.log(profile.Token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/MediaProfiles",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"MediaProfiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get stream uri",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"",
+									"pm.collectionVariables.set(\"uri_enc\", btoa(JSON.stringify({",
+									"    \"StreamSetup\" : {",
+									"        \"Stream\" : \"RTP-Multicast\",",
+									"        \"Transport\" : {",
+									"            \"Protocol\" : \"RTSP\"",
+									"        }",
+									"    },",
+									"    \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/StreamUri?jsonObject={{uri_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"StreamUri"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{uri_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						},
+						"description": "Test steps:\n\n1\\. Get profile token by executing get profiles API\n\n2\\. Update profile_token env variable in postman with value retrieved in above step"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stream Uri for all Supported Profile Tokens",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"",
+									"let currentProfile = profiles.shift();",
+									"console.log(currentProfile);",
+									"pm.collectionVariables.set(\"profile\", currentProfile);",
+									"pm.collectionVariables.set(\"profiles\", profiles);",
+									"",
+									"let req = {",
+									"    \"StreamSetup\" : {",
+									"        \"Stream\" : \"RTP-Multicast\",",
+									"        \"Transport\" : {",
+									"            \"Protocol\" : \"RTSP\"",
+									"        }",
+									"    },",
+									"    \"ProfileToken\" : currentProfile.Token",
+									"};",
+									"",
+									"console.log(req);",
+									"",
+									"pm.collectionVariables.set(\"uri_enc\", btoa(JSON.stringify(req)));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if (profiles && profiles.length > 0){",
+									"    postman.setNextRequest(\"Get Stream Uri for all Supported Profiles Token Copy\");",
+									"} else {",
+									"    postman.setNextRequest(null);",
+									"}",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/StreamUri?jsonObject={{uri_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"StreamUri"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{uri_enc}}"
+								},
+								{
+									"key": "Token",
+									"value": "{{Token}}",
+									"disabled": true
+								}
+							]
+						},
+						"description": "#### This API will works for all Profiles - But this will need to run through Run Collection -\n\nSelect Iteration no 1."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Handling",
+			"item": [
+				{
+					"name": "Get users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Users",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"CreateUsers\": {\n        \"User\": [\n            {\n                \"Username\": \"Test\",\n                \"Password\" : \"Tes123456!\",\n                \"UserLevel\": \"User\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/CreateUsers",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"CreateUsers"
+							]
+						},
+						"description": "## Create Users' API not creating new user\n\nIssue reproducible on below camera models:  \n  \n#Bosch DINION 6000HD\n\nReproduce steps:\n\nExecute this command to create a new user (Note : new user only creates through BOSH camera web-page login)\n\nExpected result: Create users api will creates an user successfully  \n  \nActual result: - Error code: SOAP-ENV:Receiver ter:Action -500 return code."
+					},
+					"response": []
+				},
+				{
+					"name": "Set user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Users\": {\n        \"User\": [\n            {\n                \"Username\": \"user\",\n                \"Password\": \"Tes123456!\",\n                \"UserLevel\": \"user\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Users",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Users"
+							]
+						},
+						"description": "## Set user can modify only if user is created through camera web interface:\n\n> Issue reproducible on below camera models:  \n> Cemera : Bosch DINION 6000HD\n\nReproduce steps:\n\nExecute this command to set a new user (Note : new user only create through bosch camera web-page login)\n\nExpected result: set users api will modify an user successfully  \nActual result: - Error code: SOAP-ENV:Receiver ter:Action -500 return code."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DeleteUsers\": {\n        \"User\": {\n            \"Username\": \"user\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}DeleteUsers",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}DeleteUsers"
+							]
+						},
+						"description": "### 'Delete Users' API not deleting users.\n\n> Issue reproducible on below camera models:  \n> Bosch DINION 6000HD\n\n  \nReproduce steps:\n\n1.  add new test user as user/orator 'add user' api\n2.  Execute get users to verify newly created user details\n3.  Delete test user which is created in step 1 using 'Delete Users' API.\n4.  Execute get users api to verify deletion of test user.\n    \n\nExpected result: Delete users api deletes user successfully  \nActual result: Not getting any error after executing delete users api, but its not deleting user."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Metadata Configuration",
+			"item": [
+				{
+					"name": "Get metadata configurations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/MetadataConfigurations",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"MetadataConfigurations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add metadata configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AddMetadataConfiguration\": {\n        \"ProfileToken\":  \"1\",\n        \"ConfigurationToken\": \"1\"\n\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AddMetadataConfiguration",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AddMetadataConfiguration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get specific metadata configuration Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"",
+									"pm.collectionVariables.set(\"mdoptions_enc\", btoa(JSON.stringify({",
+									"   \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[1].MetadataConfiguration.Token,",
+									"   \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[1].Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/MetadataConfiguration?jsonObject={{metadata_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"MetadataConfiguration"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{metadata_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get compatible metadata configurations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"",
+									"pm.collectionVariables.set(\"profile_enc\", btoa(JSON.stringify({",
+									"   \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/CompatibleMetadataConfigurations?jsonObject={{profile_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"CompatibleMetadataConfigurations"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{profile_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get metadata configuration options",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"",
+									"pm.collectionVariables.set(\"mdoptions_enc\", btoa(JSON.stringify({",
+									"   \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].MetadataConfiguration.Token,",
+									"   \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/MetadataConfigurationOptions?jsonObject={{mdoptions_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"MetadataConfigurationOptions"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{mdoptions_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove metadata configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"RemoveMetadataConfiguration\": {\n        \"ProfileToken\": \"1\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/RemoveMetadataConfiguration",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"RemoveMetadataConfiguration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set metadata configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"/*let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"pm.collectionVariables.set(\"mdoptions_enc\", btoa(JSON.stringify({",
+									"   \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].MetadataConfiguration.Token,",
+									"   \"ProfileToken\" : pm.collectionVariables.get(\"profiles\")[0].Token",
+									"})));",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"MetadataConfiguration\": {\n        \"Configuration\": {\n            \"Token\": \"1\",\n            \"SessionTimeout\": \"PT60S\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/MetadataConfiguration",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"MetadataConfiguration"
+							]
+						},
+						"description": "## Set metadata configuration not working\n\n  \n`Issue reproducible on below camera models:   -Bosch DINION 6000HD`\n\nReproduce steps:  \n  \nExecuted this command to set-meta data configuration -\n\nExpected result: set users api will set metadata configuration successfully  \nActual result: - Error code: SOAP-ENV:Receiver ter:Action -500 return code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Video Encoder Configuration",
+			"item": [
+				{
+					"name": "Get video encoder configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"pm.collectionVariables.set(\"videoencoder_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].VideoEncoderConfiguration.Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/VideoEncoderConfiguration?jsonObject={{videoencoder_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"VideoEncoderConfiguration"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{videoencoder_enc}}",
+									"description": "Base64 encoded json string"
+								}
+							]
+						},
+						"description": "Test steps:\n\n1\\. Get video encoder configuration token by executing get profiles API\n2. Update configuration_token env variable in postman with value retrieved in above step"
+					},
+					"response": []
+				},
+				{
+					"name": "Get video encoder configuration options",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "javascript"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/VideoEncoderConfigurationOptions",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"VideoEncoderConfigurationOptions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set video encoder configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"",
+									"pm.collectionVariables.set(\"videoencoder_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].VideoEncoderConfiguration.Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"VideoEncoderConfiguration\": {\n        \"Configuration\": {\n            \"Encoding\": \"H264\",\n            \"H264\": {\n                \"GovLength\": 30,\n                \"H264Profile\": \"Main\"\n            },\n            \"Resolution\": {\n                \"Height\": 1920,\n                \"Width\": 2560\n            },\n            \"SessionTimeout\": \"PT30M\",\n            \"Token\": \"VideoEncoderConfiguration1_1\",\n            \"UseCount\": 1\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/VideoEncoderConfiguration",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"VideoEncoderConfiguration"
+							]
+						},
+						"description": "## Set video encoder configuration not working correctly\n\n  \nNot able to update video encoder configuration using 'set video encoder configuration' API\n\n`Issue reproducible on below camera models:   Bosch DINION 6000HD`  \n  \nReproduce steps:\n\n1.  Execute Get video encoder configuration API to retrieve existing video encoder configuration details\n2.  Update video encoder configuration using 'set video encoder configuration'. For e.g. Govlength different than default\n3.  Intermittently its giving SOAP error on some cameras (Bosch),  \n    sometimes it wont give any error but not updating video encoder values  \n    as expected.\n    \n\nExpected result: able to update video encoder configuration values correctly  \nActual result: set video encoder configuration api not working as expected.\n\nTest steps:\n\n1\\. Get video encoder configuration token by executing get profiles API  \n2\\. Update configuration_token env variable in postman with value retrieved in above step"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Network Configuration",
+			"item": [
+				{
+					"name": "Get host name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Hostname",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Hostname"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set host name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Hostname\": {\n        \"Name\": \"My-test-Camera\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Hostname",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Hostname"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network interfaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkInterfaces",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkInterfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set network interfaces",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"NetworkInterfaces\": {\n        \"InterfaceToken\": \"eth0\",\n        \"NetworkInterface\": {\n            \"IPv4\": {\n                \"Enabled\": false,\n                \"DHCP\": false,\n                \"AcceptRouterAdvert\": false\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkInterfaces",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkInterfaces"
+							]
+						},
+						"description": "## Not able to enable/disable DHCP with set network interfaces api on Bosch camera\n\nIssue reproducible on below camera models:  \n  \nBosch DINION 6000HD\n\nRepro steps:\n\n1.  Execute get network interfaces command to retrieve existing network interfaces configuration\n2.  Execute set network interface to enable and/or dhcp option.\n3.  Execute get network interfaces command to verify updated network interfaces configuration  \n      \n    Expected result: User should be able to enable/disable DHCP on network interface using set network interfaces api.  \n      \n    Actual result: Enabling/Disabling of DHCP fails.\n    \n\n#### NOTE: NOT showing ipv6 get network interfaces"
+					},
+					"response": []
+				},
+				{
+					"name": "Set network interfaces(Revert Back to Original)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"NetworkInterfaces\": {\n        \"InterfaceToken\": \"1\",\n        \"Enabled\": true,\n        \"NetworkInterface\": {\n            \"IPv4\": {\n                \"Enabled\": true,\n                \"DHCP\": true\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v2/device/name/{{camera_name}}/NetworkInterfaces",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v2",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkInterfaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network default gateway",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkDefaultGateway",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkDefaultGateway"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set network default gateway",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"NetworkDefaultGateway\": {\n        \"NetworkGateway\": {\n            \"IPv4Address\": \"192.168.4.2\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkDefaultGateway",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkDefaultGateway"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get network protocols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkProtocols",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkProtocols"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set network protocols",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"NetworkProtocols\": {\n        \"NetworkProtocols\": [\n            {\n                \"Enabled\": true,\n                \"Name\": \"HTTPS\"\n            },\n            {\n                \"Enabled\": true,\n                \"Name\": \"RTSP\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkProtocols",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkProtocols"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set network protocols (revert back to original)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"NetworkProtocols\": {\n        \"NetworkProtocols\": [\n            {\n                \"Enabled\": true,\n                \"Name\": \"HTTPS\"\n            },\n            {\n                \"Enabled\": true,\n                \"Name\": \"RTSP\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/NetworkProtocols",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"NetworkProtocols"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DNS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DNS",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DNS"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set DNS",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"DNS\": {\n        \"FromDHCP\": false,\n        \"DNSManual\": {\n            \"Type\": \"IPv4\",\n            \"IPv4Address\": \"68.105.28.11\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/DNS",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"DNS"
+							]
+						},
+						"description": "## Set DNS API not updating camera DNS settings correctly.\n\nIssue reproducible on below camera models:\n\nBosch DINION 6000HD\n\nEnabling/disabling of DHCP not working\n\nReproduce steps:\n\n1.  Execute get DNS rest api to retrieve existing DNS configuration\n2.  Enable or disable DHCP using set DNS API\n3.  Execute Get DNS api again to verify DNS settings\n4.  Execute set DNS with dhcp set to false and updated ip address.\n5.  Verify Get DNS api to verify updated Ip address.\n    \n\nExpected result: User should be able to enable/disable DHCP and updated ip address without any issues.\n\nActual result: On Bosch camera not able to enable/disable DHCP option."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuration Analytics profile",
+			"item": [
+				{
+					"name": "GetProfiles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Media2Profiles",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Media2Profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Analytics Configurations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Media2AnalyticsConfigurations",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Media2AnalyticsConfigurations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Configuration",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"Media2AddConfiguration\":{\n      \"ProfileToken\":\"0\",\n      \"Name\":\"Analytics #3\",\n      \"Configurations\":[\n         {\n            \"Type\":\"tt:Viproc\",\n            \"Token\":\"1\"\n         }\n      ]\n   }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Media2AddConfiguration",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Media2AddConfiguration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Configuration",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Media2RemoveConfiguration\": {\n        \"ProfileToken\": \"0\",\n        \"Configurations\": [\n            {\n                \"Type\": \"tt:Viproc\",\n                \"Token\": \"1\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/Media2RemoveConfiguration",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"Media2RemoveConfiguration"
+							]
+						},
+						"description": "## 'Remove Configuration' API not working.\n\n> Issue reproducible on below camera models:  \n> \\-Bosch DINION 6000HD\n\nReproduce steps:\n\n*   command -add configuration -\n*   Verify with 'getProfiles' command - new configuration added successfully. - curl -X GET [http://localhost:59882/api/v2/device/name/Bosch-DINION-IP-starlight-6000-HD-00075fd8-7c31-317c-d85f-0700075fd85f/Media2Profiles](http://localhost:59882/api/v2/device/name/Bosch-DINION-IP-starlight-6000-HD-00075fd8-7c31-317c-d85f-0700075fd85f/Media2ProfilesNow)\n*   [Now](http://localhost:59882/api/v2/device/name/Bosch-DINION-IP-starlight-6000-HD-00075fd8-7c31-317c-d85f-0700075fd85f/Media2ProfilesNow) execute this Api to remove the newly added configuration\n    \n\nExecuted successfully - but not removed properly verify with Get-profiles command again."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Analytics Module Configuration",
+			"item": [
+				{
+					"name": "Get Supported Analytics Modules",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/SupportedAnalyticsModules",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"SupportedAnalyticsModules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Analytics Modules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsModules",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsModules"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAnalytics Module Options",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let profiles = pm.collectionVariables.get(\"profiles\");",
+									"",
+									"if(!profiles || profiles.length == 0) {",
+									"    postman.setNextRequest(\"Get profiles\");",
+									"    return;",
+									"}",
+									"pm.collectionVariables.set(\"videoSource_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : pm.collectionVariables.get(\"profiles\")[0].VideoSourceConfiguration.Token",
+									"})));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsModuleOptions?jsonObject={{videoSource_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsModuleOptions"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{videoSource_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modify Analytics Modules",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AnalyticsModules\": {\n        \"ConfigurationToken\": \"1\",\n        \"AnalyticsModule\": [\n            {\n                \"Name\": \"Viproc\",\n                \"Parameters\": {\n                    \"SimpleItem\": [\n                        {\n                            \"Name\": \"Mode\",\n                            \"Value\": \"Profile 144\"\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsModules",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsModules"
+							]
+						},
+						"description": "## 'Modify Analytics Modules' API not working.\n\n> Issue reproducible on below camera models:  \n> \\-Bosch DINION 6000HD\n\nReproduce steps:\n\nExecute this command to Modify Analytics Modules.\n\nActual result - Soap error, 500  \nExecuted - should be successfully modify"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rule configuration",
+			"item": [
+				{
+					"name": "Get Supported Rules",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"config_token_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : \"1\"",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsSupportedRules?jsonObject={{config_token_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsSupportedRules"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{config_token_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rules",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"config_token_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : \"1\"",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsRules?jsonObject={{config_token_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsRules"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{config_token_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Rules",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//NOTE- keep adding same rule name everytime."
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AnalyticsCreateRules\": {\n        \"ConfigurationToken\": \"1\",\n        \"Rule\": [\n            {\n                \"Name\": \"Test1\",\n                \"Type\": \"tt:ObjectInField\",\n                \"Parameters\": {\n                    \"SimpleItem\": [\n                        {\n                            \"Name\": \"Armed\",\n                            \"Value\": \"true\"\n                        }\n                    ]\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsCreateRules",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsCreateRules"
+							]
+						},
+						"description": "#### Create Rules' API adding multiple times same rule.\n\n> Issue reproducible on below camera models:  \n> \\-Bosch DINION 6000HD\n\nReproduce steps: -\n\nExecute this API to create a rule\n\nThen verify with GetRules command-  \ncurl -x GET GET [http://localhost:59882/api/v2/device/name/Bosch-DINION-IP-starlight-6000-HD-00075fd8-7c31-317c-d85f-0700075fd85f/Rules](http://localhost:59882/api/v2/device/name/Bosch-DINION-IP-starlight-6000-HD-00075fd8-7c31-317c-d85f-0700075fd85f/Rules)\n\nActual result - Adding multiple times same rule.  \nExecuted - Should be create one for same rule."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Rules",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//NTOE : return success but not deleted - after verify with getrules command"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"AnalyticsDeleteRules\": {\n        \"ConfigurationToken\": \"1\",\n        \"Rule\": [\n            {\n                \"RuleName\": \"Test2\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsDeleteRules",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsDeleteRules"
+							]
+						},
+						"description": "### 'Delete Rules' API not working for same rule if added multiple times.\n\n> Issue reproducible on below camera models:  \n> \\-Bosch DINION 6000HD\n\nReproduce steps:\n\n*   Execute this API - to delete the last added rules mutltple times.\n*   Then verify with GetRules command-\n    \n\n  \nActual result - Not deleting rule if added multiple times.  \nExecuted - Should be deleted rule"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rule Options",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"config_token_enc\", btoa(JSON.stringify({",
+									"    \"ConfigurationToken\" : \"1\"",
+									"})));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ConfigurationToken\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{command_host}}:{{command_port}}/api/v3/device/name/{{camera_name}}/AnalyticsRuleOptions?jsonObject={{config_token_enc}}",
+							"protocol": "http",
+							"host": [
+								"{{command_host}}"
+							],
+							"port": "{{command_port}}",
+							"path": [
+								"api",
+								"v3",
+								"device",
+								"name",
+								"{{camera_name}}",
+								"AnalyticsRuleOptions"
+							],
+							"query": [
+								{
+									"key": "jsonObject",
+									"value": "{{config_token_enc}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "profile_enc",
+			"value": ""
+		},
+		{
+			"key": "ptz_enc",
+			"value": ""
+		},
+		{
+			"key": "node_enc",
+			"value": ""
+		},
+		{
+			"key": "videoencoder_enc",
+			"value": ""
+		},
+		{
+			"key": "uri_enc",
+			"value": ""
+		},
+		{
+			"key": "profiles",
+			"value": ""
+		},
+		{
+			"key": "metadata_enc",
+			"value": ""
+		},
+		{
+			"key": "mdoptions_enc",
+			"value": ""
+		},
+		{
+			"key": "videoSource_enc",
+			"value": ""
+		},
+		{
+			"key": "ProfileToken",
+			"value": ""
+		},
+		{
+			"key": "Token",
+			"value": ""
+		},
+		{
+			"key": "profile",
+			"value": ""
+		},
+		{
+			"key": "config_token_enc",
+			"value": ""
+		}
+	]
+}
